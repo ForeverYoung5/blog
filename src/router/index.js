@@ -8,6 +8,7 @@ import ManagePicture from '@/components/admin/managePicture'
 import ManageWrite from '@/components/admin/manageWrite'
 import ManageBlog from '@/components/admin/manageBlog'
 import ArticleDetail from '@/components/admin/articleDetail'
+import UserHome from "@/components/user/user_home"
 
 Vue.use(Router);
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path:'/user_home',
+      name:'user_home',
+      component:UserHome,
     },
     {
       path: '/path',
