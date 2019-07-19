@@ -11,13 +11,13 @@
         </div>
       </div>
       <div>
-        <img style="width:calc(90vw - 500px); margin:10px 0;" :src="item.image_url"/>
+        <img style="width:55vw;height:40vh; margin:10px 0;" :src="item.image_url"/>
       </div>
       <div style="display: flex;">
         <div style="margin: 10px 80px">{{ item.abstract }}</div>
       </div>
       <div
-        style="display: flex;flex-direction:row;justify-content: space-between;a lign-items: center">
+        style="display: flex;flex-direction:row;justify-content: space-between;align-items: center">
         <div style="margin: 10px 80px;opacity:0.54;display: flex;align-items:center;">
           <div><i class="el-icon-date"></i></div>
           <div style="margin:10px;font-size:16px">{{ item.pub_time }}</div>
