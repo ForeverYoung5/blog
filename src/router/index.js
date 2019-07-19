@@ -9,6 +9,7 @@ import ManageWrite from '@/components/admin/manageWrite'
 import ManageBlog from '@/components/admin/manageBlog'
 import ArticleDetail from '@/components/admin/articleDetail'
 import UserHome from "@/components/user/user_home"
+import userArticleDetail from "@/components/user/user_article_detail"
 
 Vue.use(Router);
 
@@ -20,14 +21,19 @@ export default new Router({
       component: UserHome,
     },
     {
+      path:'/user_article_detail',
+      name:'user_article_detail',
+      component:userArticleDetail,
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login
     },
     {
-      path:'/user_home',
-      name:'user_home',
-      component:UserHome,
+      path: '/user_home',
+      name: 'user_home',
+      component: UserHome,
     },
     {
       path: '/path',

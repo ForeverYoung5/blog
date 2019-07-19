@@ -39,7 +39,6 @@
             <div style="margin:10px;font-size:16px">{{ item.pub_time }}</div>
           </div>
           <div style="margin: 0 80px">
-            <el-button size="small" type="info" @click="openSure(item)">删除文章</el-button>
             <el-button size="small" type="info" @click="goRouter(item)">查看全文 >></el-button>
           </div>
         </div>
@@ -77,8 +76,14 @@
       this.getAllArticle(this.currentPage)
     },
     methods: {
-      goRouter(name) {
-        this.$router.push(name);
+      goRouter(item) {
+        console.log(item);
+        this.$router.push({
+          name: 'user_article_detail',
+          query: {
+            article_uuid: item.article_uuid
+          }
+        })
       },
       //分页
       handleSizeChange(val) {

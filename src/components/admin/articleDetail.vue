@@ -58,6 +58,7 @@
           console.log('获取文章详情', res);
           if (res.data.code === 200) {
             this.article = res.data.data;
+            this.mdValue = res.data.data.content
           }
         })
       }
