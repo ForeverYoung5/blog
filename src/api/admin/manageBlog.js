@@ -1,5 +1,5 @@
 import axios from '../../http'
-import IP from './ip';
+import IP from '../ip';
 
 //获取全部文章
 export function allArticle(currentPage=1, pageSize=7) {

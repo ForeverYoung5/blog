@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div style="display: flex;flex-direction: row">
     <div style="height: 100vh;background: whitesmoke">
       <div style="width:320px;height:100vh;background: white">
@@ -7,14 +8,14 @@
           <img style="width: 140px;height:140px;border-radius:50%;margin-top:-70px;"
                src="../../assets/timg.png"/>
         </div>
-        <div style="margin-top: 50px">
+        <div style="margin-top: 50px;font-size: 16px;">
           <div style="font-weight:600;cursor: pointer;" @click="goRouter('/home')">主页</div>
-          <div style="font-weight:600;margin-top: 20px;cursor: pointer;" @click="show=true">目录</div>
-          <div style="font-weight:600;margin-top: 20px;cursor: pointer;">AboutMe</div>
+          <div style="font-weight:600;margin-top: 20px;cursor: pointer;" @click="getAllTag">目录</div>
+            <a style="text-decoration: none" href="https://github.com/haoyujiao/"><div style="font-weight:600;margin-top: 20px;cursor: pointer;color:black;opacity: 0.75">AboutMe</div></a>
         </div>
         <div style="display: flex;flex-direction: row;justify-content: center;margin-top: 30px;">
-          <img style="width:25px;height: 25px;margin: 10px" src="../.././assets/github.png"/>
-          <img style="width:25px;height: 25px;margin: 10px" src="../.././assets/contact.png"/>
+          <a href="https://github.com/haoyujiao/"><img style="width:25px;height: 25px;margin: 10px" src="../.././assets/github.png"/></a>
+          <a href="https://github.com/haoyujiao/"><img style="width:25px;height: 25px;margin: 10px" src="../.././assets/contact.png"/></a>
         </div>
       </div>
     </div>
@@ -61,28 +62,99 @@
       </div>
     </div>
   </div>
+  <!--    museUI-drawer1-->
+  <div>
+    <mu-flex justify-content="center" align-items="center">
+    </mu-flex>
+    <mu-drawer width="400px" :open.sync="open1" :docked="docked1" :right="position1 === 'right'">
+      <mu-list>
+        <div v-for="(item,index) in tags" :key="index">
+          <mu-list-item>
+            <mu-list-item-title @click="getArticleByTag(item)">{{ item }}</mu-list-item-title>
+          </mu-list-item>
+        </div>
+        <mu-list-item  @click="open1 = false" button>
+          <mu-list-item-title>Close</mu-list-item-title>
+        </mu-list-item>
+      </mu-list>
+    </mu-drawer>
+  </div>
+    <!--    museUI-drawer2-->
+    <div>
+      <mu-flex justify-content="center" align-items="center">
+      </mu-flex>
+      <mu-drawer width="400px" :open.sync="open2" :docked="docked2" :right="position2 === 'right'">
+        <mu-list>
+          <div v-for="(value, key) in tag_articles" >
+            <mu-list-item>
+              <mu-list-item-title>asdajdh</mu-list-item-title>
+            </mu-list-item>
+          </div>
+          <mu-list-item  @click="open2 = false" button>
+            <mu-list-item-title>Close</mu-list-item-title>
+          </mu-list-item>
+        </mu-list>
+      </mu-drawer>
+    </div>
+  </div>
 </template>
 
 <script>
   import {allArticle} from "../../api/admin/home";
+  import {allTag} from "../../api/user/user_home";
+  import {findByTag} from "../../api/user/user_home";
+
   export default {
     name: "user_home",
     data() {
       return {
         show: false,
         articles: [],
+        tag_articles:[],
         currentPage: 1,
         pageSize: 5,
-        total: 0
+        total: 0,
+        tags:[],
+      //  drawer1
+        docked1: false,
+        open1: false,
+        position1: 'right',
+        //  drawer2
+        docked2: false,
+        open2: false,
+        position2: 'right',
       }
     },
     created() {
       this.getAllArticle(this.currentPage)
     },
     methods: {
+      //根据标签获取文章
+      getArticleByTag(item){
+        findByTag(item).then( res => {
+          console.log('根据标签查询文章--->',res);
+          this.tag_articles = res.data.data;
+          console.log(this.tag_articles,'llllllllllll')
+        }).catch( err => {
+          console.log('根据文章获取标签失败--->',err)
+        })
+      },
+      //获取全部标签
+      getAllTag(){
+        this.open1 = !this.open1;
+        allTag().then( res => {
+          console.log('获取全部标签--->', res);
+          this.tags = res.data.data.tags;
+        }).catch(err => {
+          console.log('获取全部标签失败--->', err);
+        })
+      },
       goRouter(item) {
         console.log(item);
-        this.$router.push({name: 'user_home',})
+        this.$router.push({
+          name: 'user_article_detail',
+          query:{item}
+        })
       },
       //分页
       handleSizeChange(val) {
