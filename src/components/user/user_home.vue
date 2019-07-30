@@ -83,16 +83,13 @@
     <div>
       <mu-flex justify-content="center" align-items="center">
       </mu-flex>
-      <mu-drawer width="400px" :open.sync="open2" :docked="docked2" :right="position2 === 'right'">
+      <mu-drawer width="200px" :open.sync="open2" :docked="docked2" :right="position2 === 'right'">
         <mu-list>
-          <div v-for="(value, key) in tag_articles" >
+          <div v-for="(item, number) in second_tags" :key="number">
             <mu-list-item>
-              <mu-list-item-title>asdajdh</mu-list-item-title>
+              <mu-list-item-title>{{item}}</mu-list-item-title>
             </mu-list-item>
           </div>
-          <mu-list-item  @click="open2 = false" button>
-            <mu-list-item-title>Close</mu-list-item-title>
-          </mu-list-item>
         </mu-list>
       </mu-drawer>
     </div>
@@ -111,6 +108,7 @@
         show: false,
         articles: [],
         tag_articles:[],
+        second_tags:[],
         currentPage: 1,
         pageSize: 5,
         total: 0,
@@ -131,10 +129,15 @@
     methods: {
       //根据标签获取文章
       getArticleByTag(item){
+        this.tag_articles=[];
+        this.open2 = true;
         findByTag(item).then( res => {
           console.log('根据标签查询文章--->',res);
-          this.tag_articles = res.data.data;
-          console.log(this.tag_articles,'llllllllllll')
+          var i;
+          for(i in res.data.data){
+            this.second_tags.push(i);
+          };
+          console.log(this.second_tags,'llllllllllll')
         }).catch( err => {
           console.log('根据文章获取标签失败--->',err)
         })
