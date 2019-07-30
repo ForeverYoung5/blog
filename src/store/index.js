@@ -24,7 +24,7 @@ const mutations = {
     state.user = {};
     state.token = null;
     console.log('已注销！');
-    router.push('/')
+    router.push('/login')
   }
 };
 

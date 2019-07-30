@@ -12,6 +12,10 @@
           <div style="font-weight:600;margin-top: 20px;cursor: pointer;" @click="show=true">目录</div>
           <div style="font-weight:600;margin-top: 20px;cursor: pointer;">AboutMe</div>
         </div>
+        <div style="display: flex;flex-direction: row;justify-content: center;margin-top: 30px;">
+          <img style="width:25px;height: 25px;margin: 10px" src="../.././assets/github.png"/>
+          <img style="width:25px;height: 25px;margin: 10px" src="../.././assets/contact.png"/>
+        </div>
       </div>
     </div>
     <div
@@ -78,12 +82,7 @@
     methods: {
       goRouter(item) {
         console.log(item);
-        this.$router.push({
-          name: 'user_article_detail',
-          query: {
-            article_uuid: item.article_uuid
-          }
-        })
+        this.$router.push({name: 'user_home',})
       },
       //分页
       handleSizeChange(val) {
