@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/admin/login'
+import AdminTool from '@/components/admin/adminTool'
 import Home from '@/components/admin/home'
 import Base from '@/components/admin/base'
 import ManagePicture from '@/components/admin/managePicture'
@@ -24,6 +25,11 @@ export default new Router({
       path:'/user_article_detail',
       name:'user_article_detail',
       component:userArticleDetail,
+    },
+    {
+      path:'/adminTool',
+      name:'adminTool',
+      component:AdminTool,
     },
     {
       path: '/login',
