@@ -36,7 +36,7 @@
             </div>
           </div>
           <div>
-            <img style="width:55vw;height:40vh; margin:10px 0;" :src="item.image_url"/>
+            <img style="width:55vw;height:50vh; margin:10px 0;" :src="item.image_url"/>
           </div>
           <div style="display: flex;">
             <div style="margin: 10px 80px">{{ item.abstract }}</div>
